@@ -13,8 +13,10 @@ type strVal struct {
 	Value string
 }
 
+type strStore map[Key]strVal
+
 type Str struct {
-	store map[Key]strVal
+	store strStore
 	debug debug.DebugFunction
 }
 
@@ -79,7 +81,7 @@ func (s *Str) Del(key Key) error {
 
 func NewStr() *Str {
 	return &Str{
-		store: make(map[Key]strVal),
+		store: make(strStore),
 		debug: debug.Debug("zero:string"),
 	}
 }
