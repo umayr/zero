@@ -81,7 +81,7 @@ func (n *Num) Del(key Key) error {
 
 func NewNum() *Num {
 	return &Num{
-		store: make(map[Key]numVal),
-		debug: debug.Debug("mini:number"),
+		store: make(numStore),
+		debug: debug.Debug("zero:number"),
 	}
 }
