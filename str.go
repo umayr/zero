@@ -2,8 +2,8 @@ package zero
 
 import (
 	"fmt"
-	"time"
 	"strings"
+	"time"
 
 	"github.com/tj/go-debug"
 )
@@ -23,7 +23,7 @@ type Str struct {
 func (s *Str) Add(key Key, value string) {
 	s.debug("adding key %v with value %s", key, value)
 	s.store[key] = strVal{
-		Time: time.Now(),
+		Time:  time.Now(),
 		Value: value,
 	}
 }
@@ -38,7 +38,7 @@ func (s *Str) Show(key Key) (string, error) {
 	return "", fmt.Errorf("key %s not found", key)
 }
 
-func (s *Str) All() [][]string{
+func (s *Str) All() [][]string {
 	s.debug("displaying all values (%d)", len(s.store))
 	vals := [][]string{}
 	for k, v := range s.store {

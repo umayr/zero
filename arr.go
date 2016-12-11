@@ -115,7 +115,7 @@ func (a *Arr) Pop(key Key) (interface{}, error) {
 
 	var (
 		last string
-		ret interface{}
+		ret  interface{}
 	)
 
 	v.Items, last = v.Items[:len(v.Items)-1], v.Items[len(v.Items)-1]

@@ -46,7 +46,7 @@ func (p *Plug) Add(args *Args, reply *int) (err error) {
 		}
 
 		raw := strings.TrimSpace(v)
-		raw = raw[1:len(raw)-1]
+		raw = raw[1 : len(raw)-1]
 
 		arr := []interface{}{}
 		for _, s := range strings.Split(raw, ",") {
@@ -108,7 +108,7 @@ func (p *Plug) Show(args *Args, reply *string) (err error) {
 		str := p.str.All()
 		arr := p.arr.All()
 
-		all := make([][]string, len(num) + len(str) + len(arr))
+		all := make([][]string, len(num)+len(str)+len(arr))
 		all = append(all, num...)
 		all = append(all, str...)
 		all = append(all, arr...)

@@ -2,14 +2,14 @@ package zero
 
 import (
 	"fmt"
-	"time"
 	"strings"
+	"time"
 
 	"github.com/tj/go-debug"
 )
 
 type numVal struct {
-	Time time.Time
+	Time  time.Time
 	Value int64
 }
 
@@ -23,7 +23,7 @@ type Num struct {
 func (n *Num) Add(key Key, value int64) {
 	n.debug("adding key %v with value %d", key, value)
 	n.store[key] = numVal{
-		Time: time.Now(),
+		Time:  time.Now(),
 		Value: value,
 	}
 }

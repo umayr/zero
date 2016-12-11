@@ -66,9 +66,8 @@ func push(c call, args []string) (ln string, err error) {
 	v := strings.Join(args[1:], " ")
 
 	if err = c("store.Push", &zero.Args{
-		Key: zero.Key(args[0]),
+		Key:   zero.Key(args[0]),
 		Value: v,
-
 	}, &reply); err != nil {
 		return
 	}
