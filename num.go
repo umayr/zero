@@ -3,7 +3,6 @@ package zero
 import (
 	"fmt"
 	"time"
-	"strconv"
 	"strings"
 
 	"github.com/tj/go-debug"
@@ -45,7 +44,7 @@ func (n *Num) All() [][]string {
 	for k, v := range n.store {
 		vals = append(vals, []string{
 			string(k),
-			strings.TrimSpace(strconv.FormatInt(v.Value, 10)),
+			strings.TrimSpace(fmt.Sprintf("%d", v.Value)),
 			"number",
 			v.Time.Format(time.RFC822),
 		})
