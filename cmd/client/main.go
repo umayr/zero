@@ -8,12 +8,14 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/umayr/zero"
 	"github.com/olekukonko/tablewriter"
+	"github.com/umayr/zero"
 )
 
 const (
 	Add   = "ADD"
+	Push  = "PUSH"
+	Pop   = "POP"
 	Show  = "SHOW"
 	Keys  = "KEYS"
 	Count = "COUNT"
@@ -25,8 +27,8 @@ type call func(string, interface{}, interface{}) error
 type fn func(call, []string) (string, error)
 
 var (
-	regNum    = regexp.MustCompile(`-?\d+`)
-	regArrNum = regexp.MustCompile(`\[\d.*\]`)
+	regNum = regexp.MustCompile(`^(-?\d+)$`)
+	regArr = regexp.MustCompile(`^(\[.*\])$`)
 )
 
 func add(c call, args []string) (ln string, err error) {
@@ -39,6 +41,8 @@ func add(c call, args []string) (ln string, err error) {
 
 	if regNum.MatchString(v) {
 		kind = zero.Number
+	} else if regArr.MatchString(v) {
+		kind = zero.Array
 	} else {
 		kind = zero.String
 	}
@@ -50,6 +54,42 @@ func add(c call, args []string) (ln string, err error) {
 	}, nil)
 
 	ln = "OK"
+	return
+}
+
+func push(c call, args []string) (ln string, err error) {
+	if len(args) <= 1 {
+		return "", fmt.Errorf("must provide a key and value")
+	}
+
+	var reply int
+	v := strings.Join(args[1:], " ")
+
+	if err = c("store.Push", &zero.Args{
+		Key: zero.Key(args[0]),
+		Value: v,
+
+	}, &reply); err != nil {
+		return
+	}
+
+	ln = fmt.Sprintf("%v", reply)
+	return
+}
+
+func pop(c call, args []string) (ln string, err error) {
+	if len(args) < 1 {
+		return "", fmt.Errorf("must provide a key")
+	}
+
+	var reply string
+	if err = c("store.Pop", &zero.Args{
+		Key: zero.Key(args[0]),
+	}, &reply); err != nil {
+		return
+	}
+
+	ln = fmt.Sprintf("%v", reply)
 	return
 }
 
@@ -120,6 +160,7 @@ func del(c call, args []string) (ln string, err error) {
 	return
 
 }
+
 func main() {
 
 	client, err := rpc.DialHTTP("tcp", ":7161")
@@ -143,6 +184,12 @@ func main() {
 		switch strings.ToUpper(cmd) {
 		case Add:
 			f = add
+			break
+		case Push:
+			f = push
+			break
+		case Pop:
+			f = pop
 			break
 		case Show:
 			f = show
