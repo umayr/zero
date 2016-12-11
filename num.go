@@ -14,8 +14,10 @@ type numVal struct {
 	Value int64
 }
 
+type numStore map[Key]numVal
+
 type Num struct {
-	store map[Key]numVal
+	store numStore
 	debug debug.DebugFunction
 }
 
