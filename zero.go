@@ -37,8 +37,7 @@ func add(key Key, kind string) {
 func which(key Key) (string, error) {
 	d("pulling type of key %s", key)
 	if v, exists := index[key]; exists {
-		d("key found in map")
 		return v, nil
 	}
-	return "", fmt.Errorf("not found")
+	return "", fmt.Errorf("key %s not found", key)
 }
