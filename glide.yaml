@@ -1,0 +1,4 @@
+package: github.com/umayr/mini
+import:
+- package: github.com/tj/go-debug
+- package: github.com/olekukonko/tablewriter
