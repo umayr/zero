@@ -110,6 +110,10 @@ func show(c call, args []string) (ln string, err error) {
 		return
 	}
 
+	if reply == "" {
+		return
+	}
+
 	data := [][]string{}
 	for _, r := range strings.Split(reply, zero.RowSplitter) {
 		data = append(data, strings.Split(r, zero.ColumnSplitter))
