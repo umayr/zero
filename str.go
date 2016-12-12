@@ -31,7 +31,6 @@ func (s *Str) Add(key Key, value string) {
 func (s *Str) Show(key Key) (string, error) {
 	s.debug("displaying value for key %v", key)
 	if v, ok := s.store[key]; ok {
-		s.debug("key found")
 		return v.Value, nil
 	}
 
@@ -71,7 +70,6 @@ func (s *Str) Count() int {
 func (s *Str) Del(key Key) error {
 	s.debug("removing value for key %v", key)
 	if _, ok := s.store[key]; ok {
-		s.debug("key found")
 		delete(s.store, key)
 		return nil
 	}
