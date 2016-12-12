@@ -1,4 +1,5 @@
-package: github.com/umayr/mini
+package: github.com/umayr/zero
 import:
 - package: github.com/tj/go-debug
 - package: github.com/olekukonko/tablewriter
+- package: github.com/mattn/go-runewidth
