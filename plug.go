@@ -50,7 +50,7 @@ func (p *Plug) Add(args *Args, reply *int) (err error) {
 
 		arr := []interface{}{}
 		for _, s := range strings.Split(raw, ",") {
-			arr = append(arr, interface{}(s))
+			arr = append(arr, interface{}(strings.TrimSpace(s)))
 		}
 		if err = p.arr.Add(args.Key, arr); err != nil {
 			p.debug("error while adding to array store")
