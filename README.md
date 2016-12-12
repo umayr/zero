@@ -1,4 +1,4 @@
-## zero
+# zero  [![Build Status](https://travis-ci.org/umayr/zero.svg?branch=master)](https://travis-ci.org/umayr/zero) [![Go Report Card](https://goreportcard.com/badge/github.com/umayr/zero)](https://goreportcard.com/report/github.com/umayr/zero)
 > super tiny in-memory experimental store
 
 #### Build
